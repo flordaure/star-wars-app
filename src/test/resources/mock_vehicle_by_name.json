@@ -1,0 +1,29 @@
+{
+  "message": "ok",
+  "result": [
+    {
+      "properties": {
+        "model": "X-34 landspeeder",
+        "vehicle_class": "repulsorcraft",
+        "manufacturer": "SoroSuub Corporation",
+        "cost_in_credits": "10550",
+        "length": "3.4 ",
+        "crew": "1",
+        "passengers": "1",
+        "max_atmosphering_speed": "250",
+        "cargo_capacity": "5",
+        "consumables": "unknown",
+        "films": [],
+        "pilots": [],
+        "created": "2020-09-17T17:46:31.415Z",
+        "edited": "2020-09-17T17:46:31.415Z",
+        "name": "X-34 landspeeder",
+        "url": "https://www.swapi.tech/api/vehicles/7"
+      },
+      "description": "A vehicle",
+      "_id": "5f63a160cf50d100047f97fd",
+      "uid": "7",
+      "__v": 0
+    }
+  ]
+}
