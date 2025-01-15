@@ -1,6 +1,8 @@
-package com.conexaproject.star_wars_app.controller;
+package com.conexaproject.star_wars_app.integrationtest;
 
+import com.conexaproject.star_wars_app.controller.FilmControllerImpl;
 import com.conexaproject.star_wars_app.dto.BasicDataResponse;
+import com.conexaproject.star_wars_app.dto.films.FilmsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,10 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-class VehicleIntegrationTest {
+class FilmsIntegrationTest {
 
     @Autowired
-    VehicleControllerImpl vehicleController;
+    FilmControllerImpl filmController;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -46,22 +48,21 @@ class VehicleIntegrationTest {
     }
 
     @Test
-    void getVehicleFromSpecificPagesSuccess() throws Exception {
-        String urlExternalApi = "https://www.swapi.tech/api/vehicles?page=1&limit=10";
-        String urlController = "/starWarsApi/vehicles-pages";
-        BasicDataResponse vehicleResponse = objectMapper.readValue(loadJsonFromFile("mock_all_vehicle.json"), BasicDataResponse.class);
+    void getFilmsByTitleSuccess() throws Exception {
+        String urlExternalApi = "https://www.swapi.tech/api/films?title=A New Hope";
+        String urlController = "/starWarsApi/filmsByTitle";
+        FilmsResponse filmsResponse = objectMapper.readValue(loadJsonFromFile("mock_film_by_name.json"), FilmsResponse.class);
 
-        when(restTemplate.exchange(urlExternalApi, HttpMethod.GET, httpEntity, BasicDataResponse.class)).thenReturn(ResponseEntity.status(200).body(vehicleResponse));
+        when(restTemplate.exchange(urlExternalApi, HttpMethod.GET, httpEntity, FilmsResponse.class)).thenReturn(ResponseEntity.status(200).body(filmsResponse));
 
         mockMvc.perform(get(urlController)
-                .param("pages", "1")
+                .param("title", "A New Hope")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isOk())  // HTTP 200
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON)) // Verify content type
-                .andExpect(jsonPath("$[0].name").value("Sand Crawler"))
-                .andExpect(jsonPath("$[1].name").value("X-34 landspeeder"));
+                .andExpect(jsonPath("$[0].title").value("A New Hope"));
 
-        verify(restTemplate, times(1)).exchange(urlExternalApi, HttpMethod.GET, httpEntity, BasicDataResponse.class);
+        verify(restTemplate, times(1)).exchange(urlExternalApi, HttpMethod.GET, httpEntity, FilmsResponse.class);
     }
 }

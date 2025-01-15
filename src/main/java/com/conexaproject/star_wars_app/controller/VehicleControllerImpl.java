@@ -25,7 +25,7 @@ public class VehicleControllerImpl extends ApiController implements VehicleContr
 
     @Override
     public ResponseEntity<List<BasicInformation>> getVehiclesFromPages(List<Integer> pages) {
-        if (pages.isEmpty()) {
+        if (pages==null || pages.isEmpty()) {
             throw new FormatException(PAGES_PARAM_IS_NULL.getCode(), PAGES_PARAM_IS_NULL.getMessage());
         }
         return ResponseEntity.ok(vehicleService.getVehiclesOfSpecificPages(pages));

@@ -43,7 +43,7 @@ public class PeopleServiceImpl implements PeopleService {
                 throw new ServiceException(HTTP_STATUS_CODE_NOT_OK.getCode(), String.format(HTTP_STATUS_CODE_NOT_OK.getMessage(), peopleResponse.getStatusCode()));
             }
             if (peopleResponse.getBody() != null && !peopleResponse.getBody().getResults().isEmpty()) {
-                basicData = peopleResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList());
+                basicData.addAll(peopleResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList()));
 
             }
             //se obtiene la última parte de la url
@@ -65,7 +65,7 @@ public class PeopleServiceImpl implements PeopleService {
                 throw new ServiceException(HTTP_STATUS_CODE_NOT_OK.getCode(), String.format(HTTP_STATUS_CODE_NOT_OK.getMessage(), peopleResponse.getStatusCode()));
             }
             if (peopleResponse.getBody() != null && !peopleResponse.getBody().getResults().isEmpty()) {
-                basicData = peopleResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList());
+                basicData.addAll(peopleResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList()));
 
             }
         }
@@ -106,7 +106,7 @@ public class PeopleServiceImpl implements PeopleService {
             throw new DataException(NAME_NOT_FOUND.getCode(), String.format(NAME_NOT_FOUND.getMessage(), name));
         }
         if (peopleByName.getBody() != null && !peopleByName.getBody().getResult().isEmpty()) {
-            completeData = peopleByName.getBody().getResult().stream().map(CharacterMapper::getCharacterData).collect(Collectors.toList());
+            completeData.addAll(peopleByName.getBody().getResult().stream().map(CharacterMapper::getCharacterData).collect(Collectors.toList()));
         }
         return completeData;
 

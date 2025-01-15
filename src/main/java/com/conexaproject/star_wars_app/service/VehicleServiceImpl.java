@@ -44,7 +44,7 @@ public class VehicleServiceImpl implements VehicleService {
                 throw new ServiceException(HTTP_STATUS_CODE_NOT_OK.getCode(), String.format(HTTP_STATUS_CODE_NOT_OK.getMessage(), vehicleResponse.getStatusCode()));
             }
             if (vehicleResponse.getBody() != null && !vehicleResponse.getBody().getResults().isEmpty()) {
-                basicData = vehicleResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList());
+                basicData.addAll(vehicleResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList()));
 
             }
             //se obtiene la última parte de la url
@@ -67,7 +67,7 @@ public class VehicleServiceImpl implements VehicleService {
             }
             if (vehicleResponse.getBody() != null && !vehicleResponse.getBody().getResults().isEmpty()) {
 
-                basicData = vehicleResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList());
+                basicData.addAll(vehicleResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList()));
             }
         }
 
@@ -109,7 +109,7 @@ public class VehicleServiceImpl implements VehicleService {
         }
         if (vehiclesByName.getBody() != null && !vehiclesByName.getBody().getResult().isEmpty()) {
 
-            completeData = vehiclesByName.getBody().getResult().stream().map(VehicleMapper::getVehicleData).collect(Collectors.toList());
+            completeData.addAll(vehiclesByName.getBody().getResult().stream().map(VehicleMapper::getVehicleData).collect(Collectors.toList()));
         }
         return completeData;
 

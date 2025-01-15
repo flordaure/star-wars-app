@@ -44,7 +44,7 @@ public class StarshipServiceImpl implements StarshipService {
                 throw new ServiceException(HTTP_STATUS_CODE_NOT_OK.getCode(), String.format(HTTP_STATUS_CODE_NOT_OK.getMessage(), starshipsResponse.getStatusCode()));
             }
             if (starshipsResponse.getBody() != null && !starshipsResponse.getBody().getResults().isEmpty()) {
-                basicData = starshipsResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList());
+                basicData.addAll(starshipsResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList()));
 
             }
             //se obtiene la última parte de la url
@@ -66,7 +66,7 @@ public class StarshipServiceImpl implements StarshipService {
                 throw new ServiceException(HTTP_STATUS_CODE_NOT_OK.getCode(), String.format(HTTP_STATUS_CODE_NOT_OK.getMessage(), starshipsResponse.getStatusCode()));
             }
             if (starshipsResponse.getBody() != null && !starshipsResponse.getBody().getResults().isEmpty()) {
-                basicData = starshipsResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList());
+                basicData.addAll(starshipsResponse.getBody().getResults().stream().map(BasicDataMapper::getBasicData).collect(Collectors.toList()));
 
             }
         }
@@ -107,7 +107,7 @@ public class StarshipServiceImpl implements StarshipService {
             throw new DataException(NAME_NOT_FOUND.getCode(), String.format(NAME_NOT_FOUND.getMessage(), name));
         }
         if (starshipsByName.getBody() != null && !starshipsByName.getBody().getResult().isEmpty()) {
-            completeData = starshipsByName.getBody().getResult().stream().map(StarshipMapper::getStarshipData).collect(Collectors.toList());
+            completeData.addAll(starshipsByName.getBody().getResult().stream().map(StarshipMapper::getStarshipData).collect(Collectors.toList()));
         }
         return completeData;
 

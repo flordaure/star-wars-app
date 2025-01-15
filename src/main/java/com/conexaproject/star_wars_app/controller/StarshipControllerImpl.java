@@ -25,7 +25,7 @@ public class StarshipControllerImpl extends ApiController implements StarshipCon
 
     @Override
     public ResponseEntity<List<BasicInformation>> getStarshipsFromPages(List<Integer> pages) {
-        if (pages.isEmpty()) {
+        if (pages==null || pages.isEmpty()) {
             throw new FormatException(PAGES_PARAM_IS_NULL.getCode(), PAGES_PARAM_IS_NULL.getMessage());
         }
         return ResponseEntity.ok(starshipService.getStarshipsOfSpecificPages(pages));
