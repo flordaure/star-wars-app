@@ -22,6 +22,7 @@ public class FilmControllerImpl extends ApiController implements FilmController{
     public ResponseEntity<List<Film>> getAllFilms() {
         return ResponseEntity.ok(filmsService.getAllFilms());
     }
+
     @Override
     public ResponseEntity<Film> getFilmsById(Integer id){
         if (id == null) {

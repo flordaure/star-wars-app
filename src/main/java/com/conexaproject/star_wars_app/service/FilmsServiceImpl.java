@@ -1,7 +1,6 @@
 package com.conexaproject.star_wars_app.service;
 
 import com.conexaproject.star_wars_app.dto.films.FilmsByIdResponse;
-import com.conexaproject.star_wars_app.dto.films.FilmsByTitleResponse;
 import com.conexaproject.star_wars_app.dto.films.FilmsResponse;
 import com.conexaproject.star_wars_app.exceptions.DataException;
 import com.conexaproject.star_wars_app.exceptions.ServiceException;
@@ -34,9 +33,9 @@ public class FilmsServiceImpl implements FilmsService {
     @Override
     public List<Film> getAllFilms() {
         List<Film> completeData = new ArrayList<>();
-        String nextPageUrl = filmsEndpoint;
+        String url = filmsEndpoint;
 
-        ResponseEntity<FilmsResponse> filmResponse = apiService.callApi(nextPageUrl, FilmsResponse.class);
+        ResponseEntity<FilmsResponse> filmResponse = apiService.callApi(url, FilmsResponse.class);
         if (filmResponse.getStatusCode() != HttpStatus.OK) {
             throw new ServiceException(HTTP_STATUS_CODE_NOT_OK.getCode(), String.format(HTTP_STATUS_CODE_NOT_OK.getMessage(), filmResponse.getStatusCode()));
         }
@@ -72,7 +71,7 @@ public class FilmsServiceImpl implements FilmsService {
 
         List<Film> completeData = new ArrayList<>();
         String url = filmsEndpoint + "?title=" + title;
-        ResponseEntity<FilmsByTitleResponse> filmByTitle = apiService.callApi(url, FilmsByTitleResponse.class);
+        ResponseEntity<FilmsResponse> filmByTitle = apiService.callApi(url, FilmsResponse.class);
 
         if (filmByTitle.getStatusCode() != HttpStatus.OK) {
             throw new ServiceException(HTTP_STATUS_CODE_NOT_OK.getCode(), String.format(HTTP_STATUS_CODE_NOT_OK.getMessage(), filmByTitle.getStatusCode()));

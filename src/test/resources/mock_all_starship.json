@@ -3,7 +3,7 @@
   "total_records": 36,
   "total_pages": 4,
   "previous": null,
-  "next": "https://www.swapi.tech/api/starships?page=2&limit=10",
+  "next": null,
   "results": [
     {
       "uid": "2",

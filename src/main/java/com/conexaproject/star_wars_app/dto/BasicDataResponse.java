@@ -1,7 +1,5 @@
 package com.conexaproject.star_wars_app.dto;
 
-import com.conexaproject.star_wars_app.dto.BasicData;
-import com.conexaproject.star_wars_app.dto.BasicResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
