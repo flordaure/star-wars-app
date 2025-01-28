@@ -13,7 +13,9 @@ public class LoggingAspect {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);
 
-    @Pointcut("within(com.conexaproject.star_wars_app..*)")
+    @Pointcut("within(com.conexaproject.star_wars_app..*) &&" +
+            "!within(com.conexaproject.star_wars_app.jwtconfig..*) && " +
+            "!within(com.conexaproject.star_wars_app.config..*)")
     public void logForAll(){}
 
     @Before("logForAll()")
