@@ -41,7 +41,7 @@ public class AuthController {
         if (userRepository.existsByUsername(user.getUsername())) {
             return "Error: Username is already taken!";
         }
-        // Create new user's account
+
         User newUser = new User(
                 null,
                 user.getUsername(),
